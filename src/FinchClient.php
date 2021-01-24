@@ -4,7 +4,7 @@ namespace Phinch;
 
 use GuzzleHttp\Client;
 
-class ApiClient
+class FinchClient
 {
     protected const BASE_URI = 'https://api.tryfinch.com';
 

@@ -4,9 +4,9 @@ namespace Phinch;
 
 class Management
 {
-    protected ApiClient $client;
+    protected FinchClient $client;
 
-    public function __construct(ApiClient $client)
+    public function __construct(FinchClient $client)
     {
         $this->client = $client;
     }

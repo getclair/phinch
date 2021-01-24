@@ -2,13 +2,13 @@
 
 namespace Phinch\Products;
 
-use Phinch\ApiClient;
+use Phinch\FinchClient;
 
 abstract class BaseProduct
 {
-    protected ApiClient $client;
+    protected FinchClient $client;
 
-    public function __construct(ApiClient $client)
+    public function __construct(FinchClient $client)
     {
         $this->client = $client;
     }
