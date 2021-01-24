@@ -6,13 +6,31 @@ use GuzzleHttp\Client;
 
 class FinchClient
 {
-    protected const BASE_URI = 'https://api.tryfinch.com';
+    protected static string $base_uri = 'https://api.tryfinch.com';
 
+    /**
+     * @var Client
+     */
     protected Client $client;
 
+    /**
+     * @var string
+     */
     protected string $api_version;
+
+    /**
+     * @var string
+     */
     protected string $redirect_uri;
 
+    /**
+     * FinchClient constructor.
+     *
+     * @param $client_id
+     * @param $client_secret
+     * @param $api_version
+     * @param $redirect_uri
+     */
     public function __construct($client_id, $client_secret, $api_version, $redirect_uri)
     {
         $this->api_version = $api_version;
@@ -21,7 +39,7 @@ class FinchClient
         $credentials = base64_encode("{$client_id}:{$client_secret}");
 
         $this->client = new Client([
-            'base_uri' => self::BASE_URI,
+            'base_uri' => self::$base_uri,
             'headers' => [
                 'Authorization' => "Basic {$credentials}",
                 'Finch-API-Version' => $api_version,
@@ -29,21 +47,56 @@ class FinchClient
         ]);
     }
 
+    /**
+     * Make GET request.
+     *
+     * @param $path
+     * @param array $query
+     * @param array $headers
+     *
+     * @return array
+     */
     public function get($path, array $query = [], array $headers = []): array
     {
         return $this->request('get', $path, $query, $headers);
     }
 
+    /**
+     * Make POST request.
+     *
+     * @param $path
+     * @param array $params
+     * @param array $headers
+     *
+     * @return array
+     */
     public function post($path, array $params = [], array $headers = []): array
     {
         return $this->request('post', $path, $params, $headers);
     }
 
+    /**
+     * Make PUT request.
+     *
+     * @param $path
+     * @param array $params
+     * @param array $headers
+     *
+     * @return array
+     */
     public function put($path, array $params = [], array $headers = []): array
     {
         return $this->request('put', $path, $params, $headers);
     }
 
+    /**
+     * Make DELETE request.
+     *
+     * @param $path
+     * @param array $headers
+     *
+     * @return array
+     */
     public function delete($path, array $headers = []): array
     {
         return $this->request('delete', $path, $headers);
