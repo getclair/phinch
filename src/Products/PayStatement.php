@@ -1,0 +1,19 @@
+<?php
+
+namespace Phinch\Products;
+
+use Phinch\Paginated;
+
+class PayStatement extends BaseProduct
+{
+    protected const PREFIX = 'employer/pay-statement';
+
+    public function search(array $payment_ids): Paginated
+    {
+        $result = $this->client->post(self::PREFIX, [
+            'requests' => array_map(fn ($id) => ['payment_id' => $id], $payment_ids),
+        ]);
+
+        return new Paginated($result);
+    }
+}
