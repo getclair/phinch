@@ -33,7 +33,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Phinch\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",

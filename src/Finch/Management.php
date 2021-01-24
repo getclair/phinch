@@ -1,6 +1,8 @@
 <?php
 
-namespace Phinch;
+namespace Phinch\Finch;
+
+use Phinch\Finch\FinchClient;
 
 class Management
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Phinch;
+namespace Phinch\Finch;
 
 class Paginated
 {

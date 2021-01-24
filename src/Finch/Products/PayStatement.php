@@ -1,8 +1,9 @@
 <?php
 
-namespace Phinch\Products;
+namespace Phinch\Finch\Products;
 
-use Phinch\Paginated;
+use Phinch\Finch\Paginated;
+use Phinch\Finch\Products\BaseProduct;
 
 class PayStatement extends BaseProduct
 {

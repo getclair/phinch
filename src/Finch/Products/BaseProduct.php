@@ -1,8 +1,8 @@
 <?php
 
-namespace Phinch\Products;
+namespace Phinch\Finch\Products;
 
-use Phinch\FinchClient;
+use Phinch\Finch\FinchClient;
 
 abstract class BaseProduct
 {

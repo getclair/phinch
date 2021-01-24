@@ -1,6 +1,9 @@
 <?php
 
-namespace Phinch;
+namespace Phinch\Finch;
+
+use Phinch\Finch\FinchClient;
+use Phinch\Finch\Management;
 
 class Finch
 {
