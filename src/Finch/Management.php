@@ -2,8 +2,6 @@
 
 namespace Phinch\Finch;
 
-use Phinch\Finch\FinchClient;
-
 class Management
 {
     protected FinchClient $client;

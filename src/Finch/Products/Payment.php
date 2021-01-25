@@ -2,8 +2,6 @@
 
 namespace Phinch\Finch\Products;
 
-use Phinch\Finch\Products\BaseProduct;
-
 class Payment extends BaseProduct
 {
     protected const PREFIX = 'employer/payment';

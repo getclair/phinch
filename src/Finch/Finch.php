@@ -2,9 +2,6 @@
 
 namespace Phinch\Finch;
 
-use Phinch\Finch\FinchClient;
-use Phinch\Finch\Management;
-
 class Finch
 {
     /**
@@ -24,10 +21,11 @@ class Finch
 
     /**
      * @param $name
+     * @param mixed $arguments
      *
      * @return mixed
      */
-    public function __call($name)
+    public function __call($name, $arguments)
     {
         $product_name = ucwords($name);
 
