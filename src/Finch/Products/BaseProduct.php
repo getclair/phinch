@@ -6,10 +6,19 @@ use Phinch\Finch\FinchClient;
 
 abstract class BaseProduct
 {
-    protected FinchClient $client;
-
-    public function __construct(FinchClient $client)
+    /**
+     * @param FinchClient $client
+     */
+    public function __construct(protected FinchClient $client)
     {
-        $this->client = $client;
+    }
+
+    /**
+     * @param array $result
+     * @return array
+     */
+    protected function responses(array $result): array
+    {
+        return array_key_exists('responses', $result) ? $result['responses'] : [];
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Phinch\Finch;
 
+use GuzzleHttp\Exception\GuzzleException;
+
 class Finch
 {
     /**
@@ -64,6 +66,7 @@ class Finch
      * @param $code
      *
      * @return array
+     * @throws GuzzleException
      */
     public function token($code): array
     {
@@ -74,6 +77,7 @@ class Finch
      * @param $access_token
      *
      * @return array
+     * @throws GuzzleException
      */
     public function introspect($access_token): array
     {
@@ -84,6 +88,7 @@ class Finch
      * @param $access_token
      *
      * @return array
+     * @throws GuzzleException
      */
     public function disconnect($access_token): array
     {
@@ -92,6 +97,7 @@ class Finch
 
     /**
      * @return array
+     * @throws GuzzleException
      */
     public function providers(): array
     {

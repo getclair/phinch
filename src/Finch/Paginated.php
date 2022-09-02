@@ -5,18 +5,13 @@ namespace Phinch\Finch;
 class Paginated
 {
     /**
-     * @var array
-     */
-    protected array $data;
-
-    /**
      * Paginated constructor.
      *
      * @param array $data
+     * @param string|null $resultsKey
      */
-    public function __construct(array $data)
+    public function __construct(public array $data, public ?string $resultsKey = null)
     {
-        $this->data = $data;
     }
 
     /**
@@ -36,6 +31,10 @@ class Paginated
      */
     public function results(): array
     {
+        if($this->resultsKey && array_key_exists($this->resultsKey, $this->data)) {
+            return $this->data[$this->resultsKey];
+        }
+
         $data = $this->data;
 
         unset($data['paging']);

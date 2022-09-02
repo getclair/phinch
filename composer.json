@@ -1,5 +1,5 @@
 {
-    "name": "hotmeteor/phinch",
+    "name": "getclair/phinch",
     "type": "project",
     "description": "Finch API PHP SDK",
     "keywords": [
@@ -12,7 +12,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "ext-json": "*",
         "guzzlehttp/guzzle": "^7.0"
     },

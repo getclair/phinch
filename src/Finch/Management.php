@@ -2,15 +2,22 @@
 
 namespace Phinch\Finch;
 
+use GuzzleHttp\Exception\GuzzleException;
+
 class Management
 {
-    protected FinchClient $client;
-
-    public function __construct(FinchClient $client)
+    /**
+     * @param FinchClient $client
+     */
+    public function __construct(protected FinchClient $client)
     {
-        $this->client = $client;
     }
 
+    /**
+     * @param $code
+     * @return array
+     * @throws GuzzleException
+     */
     public function token($code): array
     {
         return $this->client->post('auth/token', [
@@ -19,6 +26,11 @@ class Management
         ]);
     }
 
+    /**
+     * @param $access_token
+     * @return array
+     * @throws GuzzleException
+     */
     public function disconnect($access_token): array
     {
         return $this->client->post('disconnect', [], [
@@ -29,6 +41,11 @@ class Management
         ]);
     }
 
+    /**
+     * @param $access_token
+     * @return array
+     * @throws GuzzleException
+     */
     public function introspect($access_token): array
     {
         return $this->client->get('introspect', [], [
@@ -39,6 +56,10 @@ class Management
         ]);
     }
 
+    /**
+     * @return array
+     * @throws GuzzleException
+     */
     public function providers(): array
     {
         return $this->client->get('providers');

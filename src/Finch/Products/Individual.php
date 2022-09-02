@@ -2,18 +2,26 @@
 
 namespace Phinch\Finch\Products;
 
-use Phinch\Finch\Paginated;
+use GuzzleHttp\Exception\GuzzleException;
 
 class Individual extends BaseProduct
 {
     protected const PREFIX = 'employer/individual';
 
-    public function search(array $individual_ids): Paginated
+    /**
+     * Read individual data, excluding income and employment data
+     * https://developer.tryfinch.com/docs/reference/9d6c83b09e205-individual
+     *
+     * @param array $individual_ids
+     * @return array
+     * @throws GuzzleException
+     */
+    public function search(array $individual_ids): array
     {
-        $result = $this->client->post(self::PREFIX, [
-            'requests' => array_map(fn ($id) => ['individual_id' => $id], $individual_ids),
-        ]);
-
-        return new Paginated($result);
+        return $this->responses(
+            $this->client->post(self::PREFIX, [
+                'requests' => array_map(fn($id) => ['individual_id' => $id], $individual_ids),
+            ])
+        );
     }
 }

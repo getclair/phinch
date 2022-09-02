@@ -3,9 +3,13 @@
 namespace Phinch\Finch;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
 class FinchClient
 {
+    /**
+     * @var string
+     */
     protected static string $base_uri = 'https://api.tryfinch.com';
 
     /**
@@ -14,28 +18,15 @@ class FinchClient
     protected Client $client;
 
     /**
-     * @var string
-     */
-    protected string $api_version;
-
-    /**
-     * @var string
-     */
-    protected string $redirect_uri;
-
-    /**
      * FinchClient constructor.
      *
-     * @param $client_id
-     * @param $client_secret
-     * @param $api_version
-     * @param $redirect_uri
+     * @param string $client_id
+     * @param string $client_secret
+     * @param string $api_version
+     * @param string $redirect_uri
      */
-    public function __construct($client_id, $client_secret, $api_version, $redirect_uri)
+    public function __construct(protected string $client_id, protected string $client_secret, protected string $api_version, protected string $redirect_uri)
     {
-        $this->api_version = $api_version;
-        $this->redirect_uri = $redirect_uri;
-
         $credentials = base64_encode("{$client_id}:{$client_secret}");
 
         $this->client = new Client([
@@ -55,6 +46,7 @@ class FinchClient
      * @param array $headers
      *
      * @return array
+     * @throws GuzzleException
      */
     public function get($path, array $query = [], array $headers = []): array
     {
@@ -69,6 +61,7 @@ class FinchClient
      * @param array $headers
      *
      * @return array
+     * @throws GuzzleException
      */
     public function post($path, array $params = [], array $headers = []): array
     {
@@ -83,6 +76,7 @@ class FinchClient
      * @param array $headers
      *
      * @return array
+     * @throws GuzzleException
      */
     public function put($path, array $params = [], array $headers = []): array
     {
@@ -96,12 +90,21 @@ class FinchClient
      * @param array $headers
      *
      * @return array
+     * @throws GuzzleException
      */
     public function delete($path, array $headers = []): array
     {
         return $this->request('delete', $path, $headers);
     }
 
+    /**
+     * @param $method
+     * @param $path
+     * @param array $data
+     * @param array $headers
+     * @return array
+     * @throws GuzzleException
+     */
     public function request($method, $path, array $data = [], array $headers = []): array
     {
         $method = strtoupper($method);
@@ -113,16 +116,20 @@ class FinchClient
             'headers' => $headers,
         ]);
 
-        $response = json_decode($request->getBody());
-
-        return $response;
+        return json_decode($request->getBody());
     }
 
+    /**
+     * @return string
+     */
     public function apiVersion(): string
     {
         return $this->api_version;
     }
 
+    /**
+     * @return string
+     */
     public function redirectUri(): string
     {
         return $this->redirect_uri;
