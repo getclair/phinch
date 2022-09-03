@@ -1,6 +1,6 @@
 <?php
 
-namespace Phinch\Finch\Products;
+namespace Phinch\Products;
 
 use GuzzleHttp\Exception\GuzzleException;
 

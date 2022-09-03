@@ -1,9 +1,8 @@
 <?php
 
-namespace Phinch\Finch\Products;
+namespace Phinch\Products;
 
 use GuzzleHttp\Exception\GuzzleException;
-use Phinch\Finch\Paginated;
 
 class PayStatement extends BaseProduct
 {

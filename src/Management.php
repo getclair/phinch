@@ -1,15 +1,15 @@
 <?php
 
-namespace Phinch\Finch;
+namespace Phinch;
 
 use GuzzleHttp\Exception\GuzzleException;
 
 class Management
 {
     /**
-     * @param FinchClient $client
+     * @param PhinchClient $client
      */
-    public function __construct(protected FinchClient $client)
+    public function __construct(protected PhinchClient $client)
     {
     }
 

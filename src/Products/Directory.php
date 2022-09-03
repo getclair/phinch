@@ -1,9 +1,9 @@
 <?php
 
-namespace Phinch\Finch\Products;
+namespace Phinch\Products;
 
 use GuzzleHttp\Exception\GuzzleException;
-use Phinch\Finch\Paginated;
+use Phinch\Paginated;
 
 class Directory extends BaseProduct
 {

@@ -1,24 +1,18 @@
 <?php
 
-namespace Phinch\Finch;
+namespace Phinch;
 
 use GuzzleHttp\Exception\GuzzleException;
 
-class Finch
+class Phinch
 {
-    /**
-     * @var FinchClient
-     */
-    protected FinchClient $client;
-
     /**
      * Finch constructor.
      *
-     * @param FinchClient $client
+     * @param PhinchClient $client
      */
-    public function __construct(FinchClient $client)
+    public function __construct(protected PhinchClient $client)
     {
-        $this->client = $client;
     }
 
     /**
@@ -27,11 +21,17 @@ class Finch
      *
      * @return mixed
      */
-    public function __call($name, $arguments)
+    public function __call($name, mixed $arguments)
     {
+        if ($name === 'authorize') {
+            $this->client->authorize($arguments[0]);
+
+            return $this;
+        }
+
         $product_name = ucwords($name);
 
-        $class = __CLASS__.'\\Products\\'.$product_name;
+        $class = __NAMESPACE__ . '\\Products\\' . $product_name;
 
         if (class_exists($class)) {
             return new $class($this->client);
@@ -51,7 +51,7 @@ class Finch
             return call_user_func($this->{$name}, func_get_args());
         }
 
-        return $this->__call($name);
+        return $this->__call($name, func_get_args());
     }
 
     /**
@@ -74,6 +74,9 @@ class Finch
     }
 
     /**
+     * Read account information associated with an access_token
+     * https://developer.tryfinch.com/docs/reference/eee6e798b0f93-introspect
+     *
      * @param $access_token
      *
      * @return array
@@ -85,6 +88,10 @@ class Finch
     }
 
     /**
+     * Disconnect an employer from your application and invalidate all access_tokens associated with the employer.
+     * We require applications to implement the Disconnect endpoint for billing and security purposes.
+     * https://developer.tryfinch.com/docs/reference/c65ecbd512332-disconnect
+     *
      * @param $access_token
      *
      * @return array
@@ -96,6 +103,9 @@ class Finch
     }
 
     /**
+     * Return details on all available payroll and HR systems.
+     * https://developer.tryfinch.com/docs/reference/327c384190aeb-providers
+     *
      * @return array
      * @throws GuzzleException
      */

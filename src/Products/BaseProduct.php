@@ -1,15 +1,15 @@
 <?php
 
-namespace Phinch\Finch\Products;
+namespace Phinch\Products;
 
-use Phinch\Finch\FinchClient;
+use Phinch\PhinchClient;
 
 abstract class BaseProduct
 {
     /**
-     * @param FinchClient $client
+     * @param PhinchClient $client
      */
-    public function __construct(protected FinchClient $client)
+    public function __construct(protected PhinchClient $client)
     {
     }
 

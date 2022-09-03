@@ -1,6 +1,6 @@
 <?php
 
-namespace Phinch\Finch;
+namespace Phinch;
 
 class Paginated
 {
@@ -10,7 +10,7 @@ class Paginated
      * @param array $data
      * @param string|null $resultsKey
      */
-    public function __construct(public array $data, public ?string $resultsKey = null)
+    public function __construct(protected array $data, protected ?string $resultsKey = null)
     {
     }
 
