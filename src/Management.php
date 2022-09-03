@@ -14,49 +14,34 @@ class Management
     }
 
     /**
-     * @param $code
+     * Disconnect an employer from your application and invalidate all access_tokens associated with the employer.
+     * We require applications to implement the Disconnect endpoint for billing and security purposes.
+     * https://developer.tryfinch.com/docs/reference/c65ecbd512332-disconnect
+     *
      * @return array
      * @throws GuzzleException
      */
-    public function token($code): array
+    public function disconnect(): array
     {
-        return $this->client->post('auth/token', [
-            'code' => $code,
-            'redirect_uri' => $this->client->redirectUri(),
-        ]);
+        return $this->client->post('disconnect');
     }
 
     /**
-     * @param $access_token
+     * Read account information associated with an access_token
+     * https://developer.tryfinch.com/docs/reference/eee6e798b0f93-introspect
+     *
      * @return array
      * @throws GuzzleException
      */
-    public function disconnect($access_token): array
+    public function introspect(): array
     {
-        return $this->client->post('disconnect', [], [
-            'headers' => [
-                'Authorization' => "Bearer {$access_token}",
-                'Finch-API-Version' => $this->client->apiVersion(),
-            ],
-        ]);
+        return $this->client->get('introspect');
     }
 
     /**
-     * @param $access_token
-     * @return array
-     * @throws GuzzleException
-     */
-    public function introspect($access_token): array
-    {
-        return $this->client->get('introspect', [], [
-            'headers' => [
-                'Authorization' => "Bearer {$access_token}",
-                'Finch-API-Version' => $this->client->apiVersion(),
-            ],
-        ]);
-    }
-
-    /**
+     * Return details on all available payroll and HR systems.
+     * https://developer.tryfinch.com/docs/reference/327c384190aeb-providers
+     *
      * @return array
      * @throws GuzzleException
      */
