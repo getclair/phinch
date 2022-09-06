@@ -18,6 +18,6 @@ class Directory extends BaseProduct
      */
     public function all(): Paginated
     {
-        return new Paginated($this->client->get(self::PREFIX), 'individuals');
+        return $this->paginate($this->client->get(self::PREFIX), 'individuals');
     }
 }

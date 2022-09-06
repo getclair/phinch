@@ -10,8 +10,9 @@ class Phinch
      * Finch constructor.
      *
      * @param PhinchClient $client
+     * @param string|null $paginator
      */
-    public function __construct(protected PhinchClient $client)
+    public function __construct(protected PhinchClient $client, protected ?string $paginator = null)
     {
     }
 
@@ -34,7 +35,7 @@ class Phinch
         $class = __NAMESPACE__ . '\\Products\\' . $product_name;
 
         if (class_exists($class)) {
-            return new $class($this->client);
+            return new $class($this->client, $this->paginator);
         }
 
         throw new \InvalidArgumentException("The requested product '{$name}' does not exist.");
