@@ -2,7 +2,7 @@
 
 namespace Phinch;
 
-class Paginated
+class Paginated implements \JsonSerializable
 {
     /**
      * Paginated constructor.
@@ -42,5 +42,16 @@ class Paginated
         $data = array_values($data);
 
         return array_shift($data);
+    }
+
+    /**
+     * @return false|mixed|string
+     */
+    public function jsonSerialize(): mixed
+    {
+        return json_encode([
+            'results' => $this->results(),
+            'meta' => $this->meta(),
+        ], JSON_PRETTY_PRINT);
     }
 }
