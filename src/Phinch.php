@@ -13,6 +13,12 @@ use GuzzleHttp\Exception\GuzzleException;
  * @method \Phinch\Products\Individual individual()
  * @method \Phinch\Products\Payment payment()
  * @method \Phinch\Products\PayStatement payStatement()
+ * @method \Phinch\Products\Company $company
+ * @method \Phinch\Products\Directory $directory
+ * @method \Phinch\Products\Employment $employment
+ * @method \Phinch\Products\Individual $individual
+ * @method \Phinch\Products\Payment $payment
+ * @method \Phinch\Products\PayStatement $payStatement
  */
 class Phinch
 {
