@@ -4,6 +4,16 @@ namespace Phinch;
 
 use GuzzleHttp\Exception\GuzzleException;
 
+/**
+ * @method static authorize(string $token)
+ * @method static PhinchClient client()
+ * @method \Phinch\Products\Company company()
+ * @method \Phinch\Products\Directory directory()
+ * @method \Phinch\Products\Employment employment()
+ * @method \Phinch\Products\Individual individual()
+ * @method \Phinch\Products\Payment payment()
+ * @method \Phinch\Products\PayStatement payStatement()
+ */
 class Phinch
 {
     /**
@@ -28,6 +38,10 @@ class Phinch
             $this->client->authorize($arguments[0]);
 
             return $this;
+        }
+
+        if ($name === 'client') {
+            return $this->client;
         }
 
         $product_name = ucwords($name);
