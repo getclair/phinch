@@ -13,11 +13,16 @@ class Directory extends BaseProduct
      * Read company directory and organization structure
      * https://developer.tryfinch.com/docs/reference/12419c085fc0e-directory
      *
+     * @param int $offset
+     * @param int $limit
      * @return Paginated
      * @throws GuzzleException
      */
-    public function all(): Paginated
+    public function all(int $offset = 0, int $limit = 20): Paginated
     {
-        return $this->paginate($this->client->get(self::PREFIX), 'individuals');
+        return $this->paginate($this->client->get(self::PREFIX, [
+            'limit' => $limit,
+            'offset' => $offset
+        ]), 'individuals');
     }
 }
